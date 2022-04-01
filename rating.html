@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate the place</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="rating.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <script src="rating.js"></script>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Travel India</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/index.html">Home</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Destination <span
+                        class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/coorg.html">Coorg</a></li>
+                    <li><a href="/leh.html">Ladakh</a></li>
+                    <li><a href="/manali.html">Manali</a></li>
+                    <li><a href="/goa.html">Goa</a></li>
+                    <li><a href="/rajasthan.html">Rajasthan</a></li>
+                    <li><a href="/kashmir.html">Kashmir</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Review</a></li>
+        </ul>
+    </nav>
+    <br>
+    <div class="container">
+        <div class="feedback">
+            <div class="div1">
+                <h3 style="font-family: Georgia, 'Times New Roman', Times, serif;">Please provide your feedback here..
+                </h3>
+            </div>
+            <hr>
+            <!-- <form method="post" action="#action-url"> -->
+            <form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label style="font-size: 18px;">Destination you want to rate</label><br>
+                        <select name="place" id="place" required="required">
+                            <option value="">Select Place</option>
+                            <option value="Coorg">Coorg</option>
+                            <option value="Ladakh">Ladakh</option>
+                            <option value="Manali">Manali</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Kashmir">Jammu & Kashmir</option>
+                        </select>
+                        <div id="err1"></div>
+                        <br><br>
+                        <div class="rate" id="stars">
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="text"></label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="text"></label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="text"></label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="text"></label>
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="text"></label>
+                        </div> <br><br><br>
+                        <div id="err2"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/img/rating.png" style="width: 350px;position: absolute;float: left;">
+                    </div>
+                </div>
+                <br><br><br>
+                <label for="detail" style="font-size: 18px;" style="float: left;">Please write a detailed
+                    review</label><br>
+                <textarea cols="80" name="comment" rows="10" id="rev"
+                    placeholder="Please provide your review here..."></textarea><br>
+                <button type="button" class="sub" id="sub" onclick="Add()"> Submit </button>
+            </form>
+            <br> <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3> Number of reviews:
+                        <select name="num" id="numOfRows" style="width: 20%;" onchange="showRows()">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        </h4>
+                </div>
+                <div class="col-md-6">
+                    <h2 style="text-align: center;"> Total reviews : <input type="text" value="0" id="inp1"> </h2> <br>
+                </div>
+            </div>
+            <input type="text" id="myInput" onkeyup="search()" placeholder="Search for names.."
+                title="Type in a name"></input>
+
+            <table class="table" id="tbl">
+                <thead>
+                    <tr>
+                        <th>Destination</th>
+                        <th>Ratings</th>
+                        <th>Detailed Reviews</th>
+                        <th>Edit review</th>
+                        <th>Delete review</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr>
+                        <td>Coorg</td>
+                        <td>****</td>
+                        <td>feedback...</td>
+
+                        <td> <button class="btn btn-success btn-lg">
+                                <span class="glyphicon glyphicon-pencil"></span></button></td>
+                        <td> <button class="btn btn-danger btn-lg">
+                                <span class="glyphicon glyphicon-trash"></span></button></td>
+                    </tr>
+                    <tr>
+                        <td>Ladakh</td>
+                        <td>***</td>
+                        <td>feedback...</td>
+
+                        <td> <button class="btn btn-success btn-lg">
+                                <span class="glyphicon glyphicon-pencil"></span></button></td>
+                        <td> <button class="btn btn-danger btn-lg">
+                                <span class="glyphicon glyphicon-trash"></span></button></td>
+                    </tr>
+                    <tr>
+                        <td>Manali</td>
+                        <td>*****</td>
+                        <td>feedback...</td>
+
+                        <td> <button class="btn btn-success btn-lg">
+                                <span class="glyphicon glyphicon-pencil"></span></button></td>
+                        <td> <button class="btn btn-danger btn-lg">
+                                <span class="glyphicon glyphicon-trash"></span></button></td>
+                    </tr>
+                    <tr>
+                        <td>Goa</td>
+                        <td>*****</td>
+                        <td>feedback...</td>
+
+                        <td> <button class="btn btn-success btn-lg">
+                                <span class="glyphicon glyphicon-pencil"></span></button></td>
+                        <td> <button class="btn btn-danger btn-lg">
+                                <span class="glyphicon glyphicon-trash"></span></button></td>
+                    </tr>
+                    <tr>
+                        <td>Rajasthan</td>
+                        <td>****</td>
+                        <td>feedback...</td>
+
+                        <td> <button class="btn btn-success btn-lg">
+                                <span class="glyphicon glyphicon-pencil"></span></button></td>
+                        <td> <button class="btn btn-danger btn-lg">
+                                <span class="glyphicon glyphicon-trash"></span></button></td>
+                    </tr>
+                    <tr>
+                        <td>Kashmir</td>
+                        <td>***</td>
+                        <td>feedback...</td>
+
+                        <td> <button class="btn btn-success btn-lg">
+                                <span class="glyphicon glyphicon-pencil"></span></button></td>
+                        <td> <button class="btn btn-danger btn-lg">
+                                <span class="glyphicon glyphicon-trash"></span></button></td>
+                    </tr> -->
+                </tbody>
+            </table>
+
+            <a href="javascript:prevPage()" id="btn_prev">Prev</a>
+            <a href="javascript:nextPage()" id="btn_next">Next</a>
+            page: <span id="page"></span>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-content">
+            <h3>Travel India</h3>
+            <p>This is a travel website which provides travel reviews, trending and best places suggesions, and
+                brief you about things you can enjoy there.
+                The images and information shown here are correct though just for demo purpose and are chosen
+                randomly
+            </p>
+            <ul class="socials">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+            </ul>
+        </div>
+        <p style="margin: 0px;">copyright &copy; <a href="#">Ritvika Singhal</a> </p>
+    </div>
+</body>
+
+</html>
